@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - Restaurant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h2>WELCOME </h2>
+    <h2>Login</h2>
+    <p>Don't have an account? <a href="{{ url_for('register') }}">Create one</a></p>
+    {% if msg %}
+        <p style="color:red;">{{ msg }}</p>
+    {% endif %}
+    <form method="POST">
+        <label>Username:</label><br>
+        <input type="text" name="username" required><br>
+        <label>Password:</label><br>
+        <input type="password" name="password" required><br>
+        <label>Role:</label><br>
+        <select name="role" required>
+            <option value="customer">Customer</option>
+            <option value="admin">Admin</option>
+        </select><br><br>
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>

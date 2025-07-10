@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout - Restaurant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+<body>
+    <h2>Checkout</h2>
+    <a href="{{ url_for('cart') }}">Back to Cart</a> | 
+    <a href="{{ url_for('logout') }}">Logout</a>
+
+    <form method="POST" action="{{ url_for('checkout') }}">
+        <label for="table_id">Enter Your Table Number:</label>
+        <input type="number" name="table_id" id="table_id" required min="1" placeholder="e.g. 1, 2, 3"><br><br>
+
+        <label for="payment">Select Payment Method:</label>
+        <select name="payment" id="payment" onchange="toggleCardSection()" required>
+            <option value="Credit Card">Credit Card</option>
+            <option value="Debit Card">Debit Card</option>
+            <option value="PayPal">PayPal</option>
+            <option value="Cash">Cash (Pay at table)</option>
+        </select><br><br>
+
+        <div id="card-section">
+            <label for="name-on-card">Name on Card:</label>
+            <input type="text" name="name" id="name-on-card" placeholder="John Doe" pattern="[A-Za-z\s]+" title="Only letters and spaces allowed" required><br><br>
+
+            <label for="card-number">Card Number:</label>
+            <input type="text" name="card_number" id="card-number" pattern="\d{16}" maxlength="16" minlength="16" title="16-digit numeric card number" required><br><br>
+
+            <label for="expiry">Expiry Date:</label>
+            <input type="date" name="expiry_date" id="expiry" required><br><br>
+
+            <label for="cvv">CVV:</label>
+            <input type="text" name="cvv" id="cvv" pattern="\d{3,6}" minlength="3" maxlength="6" title="CVV must be 3 to 6 digits" required><br><br>
+        </div>
+
+        <input type="hidden" name="total" value="{{ total }}">
+        <button type="submit" class="btn btn-primary">Proceed to OTP</button>
+    </form>
+
+    <script>
+        function toggleCardSection() {
+            const payment = document.getElementById('payment').value;
+            const cardSection = document.getElementById('card-section');
+            const cardFields = cardSection.querySelectorAll('input');
+
+            if (payment === 'Credit Card' || payment === 'Debit Card') {
+                cardSection.style.display = 'block';
+                cardFields.forEach(input => input.required = true);
+            } else {
+                cardSection.style.display = 'none';
+                cardFields.forEach(input => input.required = false);
+            }
+        }
+
+        // Call on page load
+        window.onload = toggleCardSection;
+    </script>
+</body>
+</html>

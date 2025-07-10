@@ -1,0 +1,22 @@
+<!-- templates/otp.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enter OTP</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+<body>
+    <h2>Enter the OTP sent to your phone/email:</h2>
+    <form method="POST" action="/verify-otp">
+        <label for="otp">OTP:</label>
+        <input type="text" name="otp" required>
+        <input type="hidden" name="payment_method" value="{{ payment_method }}">
+        <input type="hidden" name="total" value="{{ total }}">
+        <input type="hidden" name="card_number" value="{{ card_number }}">
+        <input type="hidden" name="cvv" value="{{ cvv }}">
+        <button type="submit">Verify OTP</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Success - Restaurant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+<body>
+    <h2>Order Placed Successfully!</h2>
+    <p>Thank you for your order. Your food will be served shortly.</p>
+    <a href="{{ url_for('menu') }}">Back to Menu</a> |
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>
